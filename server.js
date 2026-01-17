@@ -9,6 +9,10 @@ require('dotenv').config();
 const { User, Message } = require('./models');
 
 const app = express();
+
+// Trust proxy - Required for Render.com and other hosting platforms
+app.set('trust proxy', 1);
+
 const PORT = process.env.PORT || process.env.PORT || 3000;
 const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/askmeanon';
 const NODE_ENV = process.env.NODE_ENV || 'development';
@@ -332,3 +336,5 @@ app.listen(PORT, () => {
 });
 
 module.exports = app;
+
+
