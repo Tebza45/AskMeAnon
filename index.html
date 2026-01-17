@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="AskMeAnon - Ask your friends anything anonymously. Share a link, get honest answers. No sign-up needed.">
+    <meta name="keywords" content="anonymous questions, ask friends, honest feedback, icebreaker">
+    <meta name="author" content="AskMeAnon">
+    <meta name="theme-color" content="#7c3aed">
+    
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="AskMeAnon - Ask me anything anonymously">
+    <meta property="og:description" content="Share your link and get honest anonymous answers from your friends.">
+    <meta property="og:image" content="https://askmeanon.site/og-image.png">
+    <meta property="og:url" content="https://askmeanon.site">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="AskMeAnon - Ask me anything anonymously">
+    <meta name="twitter:description" content="Get honest anonymous feedback from friends.">
+    <meta name="twitter:image" content="https://askmeanon.site/og-image.png">
+    
+    <title>AskMeAnon - Ask me anything anonymously 👀</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Landing Page -->
+    <div id="landing-page" class="page active">
+        <div class="container landing-container">
+            <div class="landing-content">
+                <h1 class="logo">AskMeAnon</h1>
+                <p class="tagline">Ask me anything anonymously 👀</p>
+                
+                <div id="landing-error" class="hidden"></div>
+                
+                <div class="form-card">
+                    <form id="landing-form">
+                        <div class="form-group">
+                            <label for="username" aria-required="true">Your Name</label>
+                            <input 
+                                type="text" 
+                                id="username" 
+                                placeholder="Enter your name (e.g., Alex)" 
+                                required
+                                maxlength="50"
+                                aria-label="Enter your name"
+                                aria-describedby="username-help"
+                            >
+                            <small id="username-help">Your name will be shown to people answering questions</small>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-large">
+                            Create My Link 🔗
+                        </button>
+                    </form>
+                </div>
+
+                <div class="info-section">
+                    <p class="info-text">✨ <strong>How it works:</strong> Enter your name, choose a question, share the link on WhatsApp Status, and get honest anonymous answers from your friends!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Question Selection Page -->
+    <div id="question-page" class="page">
+        <div class="container">
+            <div class="page-header">
+                <button class="btn-back" onclick="goBack()" aria-label="Go back to previous page">← Back</button>
+                <h2>Choose a Question</h2>
+                <button class="btn-answers" onclick="goToDashboard()" title="View your answers" aria-label="View your answers">
+                    📬 Answers
+                </button>
+            </div>
+
+            </div>
+
+            <div class="question-list" role="region" aria-label="Available questions">
+                <div class="question-card" data-question="What do you honestly think about me?">
+                    <p class="question-text">What do you honestly think about me?</p>
+                    <div class="question-actions">
+                        <button class="btn btn-secondary" onclick="selectQuestion('What do you honestly think about me?')" aria-label="Ask: What do you honestly think about me?">Ask 🤔</button>
+                    </div>
+                </div>
+
+                <div class="question-card" data-question="Would you date me? 👀">
+                    <p class="question-text">Would you date me and why? 👀</p>
+                    <div class="question-actions">
+                        <button class="btn btn-secondary" onclick="selectQuestion('Would you date me and why? 👀')" aria-label="Ask: Would you date me and why?">Ask 🤔</button>
+                    </div>
+                </div>
+
+                <div class="question-card" data-question="What is my biggest weakness?">
+                    <p class="question-text">Guess my body count?</p>
+                    <div class="question-actions">
+                        <button class="btn btn-secondary" onclick="selectQuestion('Guess my body count?')" aria-label="Ask: Guess my body count?">Ask 🤔</button>
+                    </div>
+                </div>
+
+                <div class="question-card" data-question="What should I improve about myself?">
+                    <p class="question-text">What should I improve about myself?</p>
+                    <div class="question-actions">
+                        <button class="btn btn-secondary" onclick="selectQuestion('What should I improve about myself?')" aria-label="Ask: What should I improve about myself?">Ask 🤔</button>
+                    </div>
+                </div>
+
+                <div class="question-card" data-question="What secret would you tell me anonymously?">
+                    <p class="question-text">What secret would you tell me anonymously?</p>
+                    <div class="question-actions">
+                        <button class="btn btn-secondary" onclick="selectQuestion('What secret would you tell me anonymously?')" aria-label="Ask: What secret would you tell me?">Ask 🤔</button>
+                    </div>
+                </div>
+
+                <div class="question-card" data-question="What's your first impression of me?">
+                    <p class="question-text">What was your first impression of me?</p>
+                    <div class="question-actions">
+                        <button class="btn btn-secondary" onclick="selectQuestion('What was your first impression of me?')" aria-label="Ask: What was your first impression of me?">Ask 🤔</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Share Options Page -->
+    <div id="share-page" class="page">
+        <div class="container">
+            <div class="page-header">
+                <button class="btn-back" onclick="goBack()">← Back</button>
+                <h2>Share Your Question</h2>
+            </div>
+
+            <div class="share-preview">
+                <p class="preview-label">Your Question:</p>
+                <p id="share-question-text" class="preview-question"></p>
+            </div>
+
+            <div class="link-section">
+                <p class="link-label">Your Shareable Link:</p>
+                <div class="link-box">
+                    <input type="text" id="share-user-link" class="link-input" readonly aria-label="Your shareable link">
+                    <button class="btn btn-copy" onclick="copyUserLink()" aria-label="Copy link to clipboard">📋 Copy</button>
+                </div>
+                <p class="link-info">💡 Share this link with friends so they can answer anonymously. Works best on WhatsApp Status!</p>
+            </div>
+
+            <div class="share-buttons">
+                <button class="btn btn-success btn-large" onclick="generateStatusImage()">
+                    🎨 Generate Status Image
+                </button>
+            </div>
+
+            <div id="canvas-container" class="hidden" role="region" aria-label="Generated status image preview">
+                <canvas id="status-canvas"></canvas>
+                <div class="canvas-actions">
+                    <button class="btn btn-primary" onclick="downloadStatusImage()" aria-label="Download the status image to your device">Download Image</button>
+                    <button class="btn btn-secondary" onclick="closeCanvas()" aria-label="Close the status image preview">Close</button>
+                </div>
+            </div>
+
+            <div class="info-section">
+                <p class="info-text">📸 Download the image and upload it to WhatsApp Status or any social media. Your friends can tap the link in the image to answer your question!</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Anonymous Answer Page -->
+    <div id="answer-page" class="page">
+        <div class="container">
+            <div class="answer-content">
+                <h2 id="answer-username"></h2>
+                <div id="answer-error" class="hidden"></div>
+                <div class="answer-card">
+                    <p class="answer-label">They asked:</p>
+                    <p id="answer-question" class="answer-question"></p>
+                </div>
+
+                <form id="answer-form">
+                    <div class="form-group">
+                        <label for="answer-input">Your Anonymous Answer</label>
+                        <textarea 
+                            id="answer-input" 
+                            placeholder="Type your honest answer here..." 
+                            required
+                            maxlength="500"
+                            rows="5"
+                            aria-label="Your anonymous answer"
+                            aria-describedby="char-count"
+                        ></textarea>
+                        <small id="char-count" aria-live="polite">0/500</small>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-large">
+                        Send Anonymously 🤐
+                    </button>
+                </form>
+
+                <div class="success-banner hidden" id="success-message" role="status" aria-live="polite">
+                    <p>✅ Your answer has been sent!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- User Dashboard -->
+    <div id="dashboard-page" class="page">
+        <div class="container">
+            <div class="page-header">
+                <button class="btn-back" onclick="goBack()">← Back</button>
+                <h2>My Answers</h2>
+            </div>
+
+            <div id="messages-list" class="messages-list" role="region" aria-label="Your answers">
+                <!-- Messages will be loaded here -->
+            </div>
+
+            <div id="no-messages" class="empty-state" role="status" aria-live="polite">
+                <p>👻 No answers yet. Share your link to get anonymous answers!</p>
+                <button class="btn btn-primary" onclick="goBack()" aria-label="Go back and share your link">Go Back</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for viewing full answer -->
+    <div id="answer-modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeAnswerModal()" aria-label="Close dialog">×</button>
+            <h2 id="modal-title" style="display: none;">Answer Details</h2>
+            <p class="answer-label">Question:</p>
+            <p id="modal-question" class="modal-question"></p>
+            <p class="answer-label" style="margin-top: 20px;">Answer:</p>
+            <p id="modal-answer" class="modal-answer"></p>
+            <div class="modal-actions">
+                <button class="btn btn-success" onclick="shareAnswerToStatus()" aria-label="Share this answer to status">
+                    🎨 Share to Status
+                </button>
+                <button class="btn btn-danger" onclick="deleteAnswer()" aria-label="Delete this answer">
+                    🗑️ Delete
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <footer class="site-footer" role="contentinfo" aria-label="Site footer" style="text-align:center;padding:16px 8px;color:#94a3b8;background:transparent;font-size:0.9rem;">
+        <p style="margin:0;">&copy; T0bias</p>
+    </footer>
+
+    <script src="api-config.js"></script>
+    <script src="utils.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
